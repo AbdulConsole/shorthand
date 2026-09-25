@@ -3,11 +3,45 @@
 An `abook`-style CLI tool for storing and managing your Linux shell aliases,
 with the same kind of ncurses list-and-edit experience.
 
-## Setup
+## Setup (Linux / macOS)
 
 ```bash
 chmod +x shorthand.py
 sudo mv shorthand.py /usr/local/bin/shorthand   # or anywhere on your PATH
+```
+
+## Setup (Termux, Android)
+
+Termux ships Python without a `sudo` command and uses its own prefix for
+installed binaries, so the steps are slightly different:
+
+```bash
+pkg update && pkg upgrade
+pkg install python
+```
+
+Then, from the folder containing `shorthand.py`:
+
+```bash
+chmod +x shorthand.py
+mv shorthand.py $PREFIX/bin/shorthand   # puts it on Termux's PATH, no sudo needed
+```
+
+Run it with:
+
+```bash
+shorthand
+```
+
+Everything else — `add`, `rm`, `list`, `export`, `install` — works exactly the
+same as on Linux. `shorthand install` looks for `~/.bashrc` and `~/.zshrc`
+under Termux's home (`/data/data/com.termux/files/home`); if you're on
+Termux's default shell and neither file exists yet, create one first:
+
+```bash
+touch ~/.bashrc
+shorthand install
+source ~/.bashrc
 ```
 
 ## Interactive mode (abook-like UI)
